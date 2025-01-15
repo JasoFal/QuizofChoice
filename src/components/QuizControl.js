@@ -5,7 +5,7 @@ import EditQuizForm from './EditQuizForm';
 import QuizDetail from './QuizDetails';
 import QuizResult from './SubmitQuiz.js';
 import { db } from './../firebase.js'
-import { collection, addDoc, doc, updateDoc, onSnapshot, deleteDoc} from "firebase/firestore";
+import { collection, addDoc, doc, updateDoc, onSnapshot, deleteDoc } from "firebase/firestore";
 
 
 function QuizControl() {
@@ -49,7 +49,7 @@ function QuizControl() {
   const handleDeletingQuiz = async (id) => {
     await deleteDoc(doc(db, "quizzes", id));
     setSelectedQuiz(null);
-  } 
+  }
 
   const handleEditClick = () => {
     setEditing(true);
@@ -72,7 +72,6 @@ function QuizControl() {
   }
 
   const handleAddingNewQuizResult = async (newQuizResultData) => {
-    console.log(newQuizResultData);
     await addDoc(collection(db, "quizResults"), newQuizResultData);
     setTakingQuiz(false);
   }
@@ -90,39 +89,39 @@ function QuizControl() {
   } if (editing) {
     currentlyVisibleState =
       <EditQuizForm
-        quiz = {selectedQuiz}
-        onEditQuiz = {handleEditingQuizInList}/>
+        quiz={selectedQuiz}
+        onEditQuiz={handleEditingQuizInList} />
     buttonText = "Return to Quiz List"
   } else if (takingQuiz) {
     currentlyVisibleState =
       <QuizResult
         quiz={selectedQuiz}
-        onNewQuizResult={handleAddingNewQuizResult}/>
+        onNewQuizResult={handleAddingNewQuizResult} />
   } else if (selectedQuiz != null) {
     currentlyVisibleState =
       <QuizDetail
         quiz={selectedQuiz}
         onClickingDelete={handleDeletingQuiz}
         onClickingEdit={handleEditClick}
-        onTakingQuiz={handleTakingQuizClick}/>
+        onTakingQuiz={handleTakingQuizClick} />
     buttonText = "Return to Quiz List"
   } else if (formVisibleOnPage) {
-    currentlyVisibleState = 
-      <NewQuizForm 
-        onNewQuizCreation={handleAddingNewQuizToList}/>;
-    buttonText = "Return to Quiz List"; 
+    currentlyVisibleState =
+      <NewQuizForm
+        onNewQuizCreation={handleAddingNewQuizToList} />;
+    buttonText = "Return to Quiz List";
   } else {
-    currentlyVisibleState = 
-      <QuizList 
-        onQuizSelection={handleChangingSelectedQuiz} 
+    currentlyVisibleState =
+      <QuizList
+        onQuizSelection={handleChangingSelectedQuiz}
         quizList={mainQuizList} />;
-    buttonText = "Add Quiz"; 
+    buttonText = "Add Quiz";
   }
 
   return (
     <React.Fragment>
       {currentlyVisibleState}
-      {error ? null : <button onClick={handleClick}>{buttonText}</button>} 
+      {error ? null : <button onClick={handleClick}>{buttonText}</button>}
     </React.Fragment>
   );
 }
