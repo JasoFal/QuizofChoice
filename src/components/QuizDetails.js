@@ -1,20 +1,37 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React, { useState, useEffect } from 'react';
+import { collection, onSnapshot, where, query } from "firebase/firestore";
+import { db } from './../firebase.js'
+import QuizResultList from "./QuizResultList.js";
 
 function QuizDetail(props) {
   const { quiz, onClickingDelete } = props;
+  const [ quizResultList, setQuizResultList ] = useState([]);
+  const [ error, setError ] = useState(null);
 
   useEffect(() => {
-    const unSub = onSnapshot(
+    const quizResultsQuery = query(
       collection(db, "quizResults"),
-      where("connectedQuiz", "==", selectedQuiz.id)
-        (collectionSnapshot) => {
-      const quizResults = [];
-      collectionSnapshot.forEach((doc) => {
-
-      });
+      where("connectedQuiz", "==", quiz.id)
     );
 
+    const unSubscribe = onSnapshot(
+      quizResultsQuery, (querySnapshot) => {
+        const quizResults = [];
+        querySnapshot.forEach((doc) => {
+          quizResults.push({
+            ...doc.data(),
+            id: doc.id
+          });
+        });
+        setQuizResultList(quizResults);
+      },
+      (error) => {
+        setError(error.message);
+      }
+    );
+    return () => unSubscribe();
+  }, [quiz.id]);
 
   return (
     <React.Fragment>
@@ -31,6 +48,7 @@ function QuizDetail(props) {
       <hr />
 
       <h1>Quiz Results</h1>
+      { error ? (<p>{error}</p>) : <QuizResultList quizResultList={ quizResultList }/> }
     </React.Fragment>
   );
 }
