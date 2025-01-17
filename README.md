@@ -1,6 +1,6 @@
 # Quiz of Choice
 
-#### A Fidgetech project
+#### A class project to practice No-Sql
 
 #### By Jason Falk
 
@@ -14,10 +14,10 @@
 
 ## Description
 
- 
+ Save and complete quizzes with the brand new quiz-of-choice app. You can even create your own quizzes.
 
-## Setup/Installation Requirements
-## Set up a firebase account
+# Setup/Installation Requirements
+### Set up a firebase account
 1. Start by navigating to https://firebase.google.com/ in the browser.
 2. Then, click on Get Started. This will take you to a sign in page where you can log into a Google account (or create one if needed).
 3. Access the Firebase console by going to `https://console.firebase.google.com/`.
@@ -30,13 +30,14 @@
 10. When we click on the </> button, we'll be taken to a page that reads Add Firebase to your web app. You will need to enter an app nickname (The nickname you choose should be something that you can differentiate from other apps.) You could also click firebase hosting for this app but it's not needed.
 12. You'll be given a script that you will include in our source code to configure and initialize firebase in our application. (You can still access that script in project settings)
 ----------
+### Set Up Project
 1. _In Git Bash type or copy/paste `git clone https://github.com/JasoFal/QuizofChoice.git`._
 2. _Navigate to directory project was cloned to using git bash/file explorer/any other way._
 * _Using git input the following commands into the terminal below_
 3. _Install all packages with <mark>$ npm install<mark>_
 4. _Build project using webpack with <mark>$ npm run build<mark>_
 5. _Navigate to the top level directory and add a file called `.env`_
-6. _First, head on over to your Help Queue project settings in Firebase to get the Firebase configuration settings. From the project homepage, select the cog icon at the top-left of the screen, select Project settings, and scroll down until you find the help-queue-web app that we created in the last lesson. In this section, you'll find a code snippet that has a firebaseConfig variable that looks something like this:_
+6. _First, head on over to your Quiz of Choice project settings in Firebase to get the Firebase configuration settings. From the project homepage, select the cog icon at the top-left of the screen, select Project settings, and scroll down until you find the Quiz-of-choice app. In this section, you'll find a code snippet that has a firebaseConfig variable that looks something like this:_
 
 var firebaseConfig = {
   apiKey: "YOUR-UNIQUE-CREDENTIALS",
